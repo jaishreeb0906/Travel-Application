@@ -2,17 +2,19 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - name: Setup Java 21
+  - name: Set Java 21 Environment
     init: |
-      ./setup-java21.sh
-      source ~/.bashrc
+      echo 'export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64' >> ~/.bashrc
+      echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
+      export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+      export PATH=$JAVA_HOME/bin:$PATH
 
   - name: Verify Java
     init: |
       source ~/.bashrc
       java -version
 
-  - name: Backend
+  - name: Backend Build
     init: |
       source ~/.bashrc
       cd Backend/Corporateapp/Corporateapp && ./mvnw clean install
